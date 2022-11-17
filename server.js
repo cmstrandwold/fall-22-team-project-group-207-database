@@ -1,14 +1,8 @@
 
-const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://cstrand:9nDzeuX2jJpLr1is@game-leaderboard.me1bh2x.mongodb.net";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
- // perform actions on the collection object
-  client.close();
-});
 
 const mongoose = require('mongoose');
+console.log(uri)
 mongoose.connect(uri);
 
 const express = require('express');
@@ -16,6 +10,8 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+console.log('point 1')
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -41,5 +37,9 @@ app.get('/', (req, res, next) => {
 
 require('./db/leaderboard/service')(app);
 
+console.log('point 2')
+
 app.listen(process.env.PORT || 4000);
+
+console.log('point 3')
 
