@@ -16,7 +16,15 @@ app.post("/leaderboard/add", async (request, response) => {
 app.post("/leaderboard/updateWins", async (request, response) => {  
     const leader = new leaderModel(request.body)
     try {
-        const result = await leaderModel.updateOne(leader);
+        await leader.save();
+        const filter = { id: leader.id };
+        const options = { upsert: true };
+        const updateDoc = {
+          $set: {
+            wins: leader.wins
+          },
+        };
+        const result = await leaderModel.updateOne(filter, updateDoc, options);
         console.log(
           `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`,
         );
