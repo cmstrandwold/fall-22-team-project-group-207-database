@@ -13,12 +13,19 @@ app.post("/leaderboard/add", async (request, response) => {
     }
 });
 
-app.post("/leaderboard/update/id/{leaderID}", async (request, response) => {
-    const leader = new leaderModel(request.body) || new leaderModel({"name": "test request", "wins": 11});
-  
+app.post("/leaderboard/updateWins", async (request, response) => {  
     try {
-      await leader.save();
-      response.send(leader);
+        const filter = { id: request.body.id };
+        const options = { upsert: true };
+        const updateDoc = {
+          $set: {
+            wins: request.body.wins
+          },
+        };
+        const result = await leaderModel.updateOne(filter, updateDoc, options);
+        console.log(
+          `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`,
+        );
     } catch (error) {
       response.status(500).send(error);
     }
