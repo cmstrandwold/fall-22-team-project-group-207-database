@@ -13,7 +13,7 @@ app.post("/leaderboard/add", async (request, response) => {
     }
 });
 
-app.post("/leaderboard/updateWins", async (request, response) => {  
+app.patch("/leaderboard/updateWins", async (request, response) => {  
     const leader = new leaderModel(request.body)
     try {
         await leader.save();
