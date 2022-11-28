@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+var cors = require('cors')
+
+app.use(cors())
+
 const username = "cstrand";
 const password = "9nDzeuX2jJpLr1is";
 const cluster = "game-leaderboard";
@@ -34,6 +38,8 @@ db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", function () {
   console.log("Connected successfully");
 });
+
+
 
 
 
