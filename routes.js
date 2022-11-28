@@ -17,14 +17,9 @@ app.patch("/leaderboard/updateWins", async (request, response) => {
     const leader = new leaderModel(request.body)
     try {
         await leader.save();
-        console.log(leader.id);
         const filter = { id: leader.id };
         const options = { upsert: false };
-        const updateDoc = {
-          $set: {
-            wins: leader.wins
-          },
-        };
+        const updateDoc = { wins: 999 };
         const result = await leaderModel.updateOne(filter, updateDoc, options);
         console.log(
           `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`,
