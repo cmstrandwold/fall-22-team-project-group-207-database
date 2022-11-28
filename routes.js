@@ -17,8 +17,9 @@ app.patch("/leaderboard/updateWins", async (request, response) => {
     const leader = new leaderModel(request.body)
     try {
         await leader.save();
+        console.log(leader.id);
         const filter = { id: leader.id };
-        const options = { upsert: true };
+        const options = { upsert: false };
         const updateDoc = {
           $set: {
             wins: leader.wins
