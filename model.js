@@ -7,7 +7,7 @@
 const mongoose = require("mongoose");
 
 const LeaderSchema = new mongoose.Schema({
-  id: {
+  user_id: {
     type: String,
     required: true,
   },
