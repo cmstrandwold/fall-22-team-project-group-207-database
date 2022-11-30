@@ -1,9 +1,3 @@
-// const mongoose = require('mongoose');
-// const schema = require('./schema');
-
-// const model = mongoose.model('LeaderboardModel', schema);
-// module.exports = model;
-
 const mongoose = require("mongoose");
 
 const LeaderSchema = new mongoose.Schema({
